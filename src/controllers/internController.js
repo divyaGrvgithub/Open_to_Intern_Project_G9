@@ -37,8 +37,7 @@ const createInterns = async function (req, res) {
                 if (!(validator.isValidCharacterLimit2to8(collegeName) && validator.isValid(collegeName))) {
                     return res.status(400).send({ status: false, message: "please provide your valid college Name" })
                 }
-
-
+                
                 const checkCollege = await collegeModel.findOne({ name: collegeName.trim().toUpperCase() })
                 if (checkCollege) {
 
@@ -58,4 +57,4 @@ const createInterns = async function (req, res) {
     }
 }
 
-module.exports.createInterns = createInterns
+module.exports.createInterns = createInterns;
