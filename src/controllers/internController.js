@@ -2,7 +2,8 @@ const collegeModel = require("../models/collegeModel.js");
 const internModel = require("../models/internModel.js");
 const validator = require("../validator/validator.js");
 
-
+// <----------------------------Post Api--------------------------------->
+// ---------------This Api is used for Create Intern---------------------
 
 const createInterns = async function (req, res) {
     try {
@@ -33,10 +34,8 @@ const createInterns = async function (req, res) {
                     return res.status(400).send({ status: false, message: `This number: ${mobile} is already in used for intern` })
                 } 
 
-
-
-       if (!(validator.isValidCharacterLimit2to8(collegeName)&& validator.isValid(collegeName))){            
-          return res.status(400).send({ status: false, message: "please provide your valid college Name"})}                   
+            if (!(validator.isValidCharacterLimit2to8(collegeName)&& validator.isValid(collegeName))){            
+                  return res.status(400).send({ status: false, message: "please provide your valid college Name"})}                   
 
                     
             const checkCollege = await collegeModel.findOne({ name: collegeName.trim().toUpperCase()})              
