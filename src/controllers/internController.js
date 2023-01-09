@@ -18,7 +18,7 @@ const createInterns = async function (req, res) {
                 if (!(validator.isValidEmail(email) && validator.isValid(email))) {
                     return res.status(400).send({ status: false, message: "please provide your valid email" })
                 }
-                
+
             const checkEmail = await internModel.findOne({ email: email.trim().toLowerCase() })
                 if (checkEmail) {
                     return res.status(400).send({ status: false, message: `This email: ${email.trim()} is already in used for intern`})
@@ -33,8 +33,10 @@ const createInterns = async function (req, res) {
                     return res.status(400).send({ status: false, message: `This number: ${mobile} is already in used for intern` })
                 } 
 
-                if (!(validator.isValidCharacterLimit2to100(collegeName)&& validator.isValid(collegeName))){            
-                    return res.status(400).send({ status: false, message: "please provide your valid college Name"})}                   
+
+
+       if (!(validator.isValidCharacterLimit2to8(collegeName)&& validator.isValid(collegeName))){            
+          return res.status(400).send({ status: false, message: "please provide your valid college Name"})}                   
 
                     
             const checkCollege = await collegeModel.findOne({ name: collegeName.trim().toUpperCase()})              

@@ -47,7 +47,7 @@ const createCollege = async (req, res) => {
                 status(400)
                 .send({ status: false, message: "please Enter a valid fullname" })
         }
-        const checkFullname = await collegeModel.findOne({ fullName: fullName.trim() })
+        const checkFullname = await collegeModel.findOne({ fullName: fullName.trim().toLowerCase() })
         if (checkFullname) {
             return res.status(400).send({ status: false, msg: `college ${fullName} is already present` })
         }
