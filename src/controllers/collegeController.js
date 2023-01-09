@@ -59,4 +59,11 @@ const createCollege = async (req, res) => {
         return res.status(500).send({ status: false, message: error.message });
     }
 };
+
+// <----------------------------Get Api--------------------------------->
+// ----------This Api is used for Get College Intern data----------------
+
+
+
+
 module.exports.createCollege = createCollege;
