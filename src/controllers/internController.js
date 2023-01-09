@@ -11,30 +11,38 @@ const createInterns = async function (req, res) {
         }
         else {
             const{ name, email, mobile, collegeName } = req.body
-            if (name && email) {
+            if (name && email && mobile && collegeName) {
                 if (!(validator.isValidCharacterLimit2to100(name) && validator.isValid(name))) {
-                    return res.status(400).send({ status: false, message: "please provide your valid name, e.g: Name and Surname" })
+                    return res.status(400).send({ status: false, message: "please provide your valid name" })
                 }
                 if (!(validator.isValidEmail(email) && validator.isValid(email))) {
-                    return res.status(400).send({ status: false, message: "please provide your valid email, e.g: example@example.example" })
-                }    
+                    return res.status(400).send({ status: false, message: "please provide your valid email" })
+                }
+                
+            const checkEmail = await internModel.findOne({ email: email.trim().toLowerCase() })
+                if (checkEmail) {
+                    return res.status(400).send({ status: false, message: `This email: ${email.trim()} is already in used for intern`})
+                }
+                    
                 if (!(validator.isValidNumber(mobile) && validator.isValid(mobile))) {
-                    return res.status(400).send({ status: false, message: "please provide your valid Number with 91, Number size should be of 10 , e.g: 911234567890" })
-            }     
+                    return res.status(400).send({ status: false, message: "please provide your valid Number with 91, Number size should be of 10" })
+                }     
+            
             const checkMobile = await internModel.findOne({ mobile: mobile})
                 if (checkMobile) {
                     return res.status(400).send({ status: false, message: `This number: ${mobile} is already in used for intern` })
                 } 
+
                 if (!(validator.isValidCharacterLimit2to100(collegeName)&& validator.isValid(collegeName))){            
-                    return res.status(400).send({ status: false, message: "please provide your valid collegeName"})}
-                        
+                    return res.status(400).send({ status: false, message: "please provide your valid college Name"})}                   
 
                     
-            const checkCollege = await collegeModel.findOne({ name: collegeName.trim()})              
+            const checkCollege = await collegeModel.findOne({ name: collegeName.trim().toUpperCase()})              
                 if (checkCollege){
-            const createIntern = await internModel.create({ name: name.trim(), email: email.trim()})
+
+            const createIntern = await internModel.create({ name: name.trim(), email: email.trim().toLowerCase(), mobile: mobile, collegeId: checkCollege._id})
                return res.status(201).send({ status: true, data: createIntern })
-            }     
+            }       
             else {
                 return res.status(404).send({ status: false, message: "college is not present" })
                 }        
