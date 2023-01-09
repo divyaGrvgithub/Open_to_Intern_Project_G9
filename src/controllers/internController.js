@@ -27,7 +27,7 @@ const createInterns = async function (req, res) {
                     return res.status(400).send({ status: false, message: "please provide your valid email" })
                 }
 
-                const checkEmail = await internModel.findOne({ email: email.trim().toLowerCase() })
+                const checkEmail = await internModel.findOne({ email: email.trim()})
                 if (checkEmail) {
                     return res.status(400).send({ status: false, message: `This email: ${email.trim()} is already in used for intern` })
                 }
@@ -45,10 +45,10 @@ const createInterns = async function (req, res) {
                     return res.status(400).send({ status: false, message: "please provide your valid college Name" })
                 }
                 
-                const checkCollege = await collegeModel.findOne({ name: collegeName.trim().toUpperCase() })
+                const checkCollege = await collegeModel.findOne({ name: collegeName.trim()})
                 if (checkCollege) {
 
-                    const createIntern = await internModel.create({ name: name.trim(), email: email.trim().toLowerCase(), mobile: mobile, collegeId: checkCollege._id })
+                    const createIntern = await internModel.create({ name: name.trim(), email: email.trim(), mobile: mobile, collegeId: checkCollege._id })
                     return res.status(201).send({ status: true, data: createIntern })
                 }
                 else {
