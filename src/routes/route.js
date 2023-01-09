@@ -9,7 +9,7 @@ router.get("/test-me", function (req, res) {
 
 router.post("/functionup/colleges",collegeController.createCollege)
 
-// router.post("/functionup/interns",internController.createInterns)
+router.post("/functionup/interns",internController.createInterns)
 
 
 module.exports = router;    
