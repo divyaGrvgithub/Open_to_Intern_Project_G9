@@ -4,11 +4,11 @@ const isValid = function (value) {
     return true
   }
   
-  // const isValidUrl = function (value) {
-  //   const regEx = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/
-  //   const result = regEx.test(value)
-  //   return result
-  // }
+  const isValidUrl = function (value) {
+    const regEx = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/
+    const result = regEx.test(value)
+    return result
+  }
   
   const isValidCharacterLimit2to8 = function (value) {
     const regEx = /^\s*([a-zA-Z\.]){2,8}\s*$/
@@ -36,7 +36,7 @@ const isValid = function (value) {
   }
   
   module.exports.isValid = isValid
-  // module.exports.isValidUrl = isValidUrl
+  module.exports.isValidUrl = isValidUrl
   module.exports.isValidCharacterLimit2to8 = isValidCharacterLimit2to8
   module.exports.isValidCharacterLimit2to100 = isValidCharacterLimit2to100
   module.exports.isValidNumber = isValidNumber
