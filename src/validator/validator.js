@@ -10,13 +10,13 @@ const isValid = function (value) {
     return result
   }
   
-  const isValidCharacterLimit2to8 = function (value) {
+  const isValidcollegeName = function (value) {
     const regEx = /^\s*([a-zA-Z\.]){2,8}\s*$/
     const result = regEx.test(value)
     return result
   }
   
-  const isValidCharacterLimit2to100 = function (value) {
+  const isValidName = function (value) {
     const regEx = /^\s*([a-zA-Z\s\,\.]){2,100}\s*$/
     const result = regEx.test(value)
     return result
@@ -37,7 +37,7 @@ const isValid = function (value) {
   
   module.exports.isValid = isValid
   module.exports.isValidUrl = isValidUrl
-  module.exports.isValidCharacterLimit2to8 = isValidCharacterLimit2to8
-  module.exports.isValidCharacterLimit2to100 = isValidCharacterLimit2to100
+  module.exports.isValidcollegeName = isValidcollegeName
+  module.exports.isValidName = isValidName
   module.exports.isValidNumber = isValidNumber
   module.exports.isValidEmail = isValidEmail

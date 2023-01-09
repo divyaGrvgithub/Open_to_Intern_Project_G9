@@ -18,7 +18,7 @@ const createInterns = async function (req, res) {
             if(!mobile) return res.status(400).send({status:false, msg:"Please Provide mobile"})
             if(!collegeName) return res.status(400).send({status:false, msg:"Please Provide collegeName"})
             
-                if (!(validator.isValidCharacterLimit2to100(name) && validator.isValid(name))) {
+                if (!(validator.isValidName(name) && validator.isValid(name))) {
                     return res.status(400).send({ status: false, message: "please provide your valid name" })
 
 
@@ -41,7 +41,7 @@ const createInterns = async function (req, res) {
                     return res.status(400).send({ status: false, message: `This number: ${mobile} is already in used for intern` })
                 }
 
-                if (!(validator.isValidCharacterLimit2to8(collegeName) && validator.isValid(collegeName))) {
+                if (!(validator.isValidcollegeName(collegeName) && validator.isValid(collegeName))) {
                     return res.status(400).send({ status: false, message: "please provide your valid college Name" })
                 }
                 
