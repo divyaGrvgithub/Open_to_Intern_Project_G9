@@ -8,7 +8,7 @@ app.use(express.json());
 // app.use(bodyParser.urlencoded({ extended: true }));
 
 mongoose.set('strictQuery', true)
-mongoose.connect("mongodb+srv://divyamala_:Dt25042000knp@divyamala.0cofsch.mongodb.net/divyaGrv", {
+mongoose.connect("mongodb+srv://divyamala_:Dt25042000knp@divyamala.0cofsch.mongodb.net/groupXDatabase", {
     useNewUrlParser: true
 })
     .then(() => console.log("MongoDb is connected"))
