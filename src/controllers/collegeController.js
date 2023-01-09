@@ -1,6 +1,7 @@
-const internModel = require("../models/internModel");
+// const internModel = require("../models/internModel");
 const collegeModel = require("../models/collegeModel");
 const validator = require("../validator/validator")
+// const valid = require("validator")
 
 // <----------------------------Post Api--------------------------------->
 // ---------------This Api is used for Create College---------------------
@@ -20,20 +21,20 @@ const createCollege = async (req, res) => {
         if (!name) {
             return res
                 .status(400)//bad request
-                .send({ status: false, message: "please provide your valid name" })
+                .send({ status: false, message: "Name must contain" })
         }
         // const validName = (/^\s*([a-zA-Z\.]){2,8}\s*$/)
         if (!validator.isValid(name)) {
             return res.
-                status(400).send({ status: false, message: "Invalid name." })
+                status(400).send({ status: false, message: "Please provide valid name !" })
         }
 
-        let check = await collegeModel.findOne({ name: name })
-        if (!check) {
-            return res.
-                status(400).
-                send({ status: false, message: "Please provide your valid College Name" })
+
+        const checkCollege = await collegeModel.findOne({ name: name.trim().toUpperCase() })
+        if (checkCollege) {
+            return res.status(400).send({ status: false, msg: `college ${name} is already present` })
         }
+
 
         if (!fullName) {
             return res.
@@ -44,25 +45,37 @@ const createCollege = async (req, res) => {
         if (!validator.isValidCharacterLimit2to100(fullName)) {
             return res.
                 status(400)
-                .send({ status: false, message: "Invalid fullname" })
+                .send({ status: false, message: "please Enter a valid fullname" })
         }
+        const checkFullname = await collegeModel.findOne({ fullName: fullName.trim() })
+        if (checkFullname) {
+            return res.status(400).send({ status: false, msg: `college ${fullName} is already present` })
+        }
+
+
 
         if (!logoLink) {
             return res.
                 status(400)
-                .send({ status: false, message: "please provide logolink" })
+                .send({ status: false, message: "LogoLink must contain" })
         }
+
         // const validLogoLink = /^https?:\/\/(.+\/)+.+(\.(png|jpg|jpeg))$/i
         if (!validator.isValidUrl(logoLink)) {
             return res.
                 status(400)
-                .send({ status: false, message: "Invalid logolink." })
+                .send({ status: false, message: "please Enter a valid logolink." })
+        }
+
+        const checkLink = await collegeModel.findOne({ logoLink: logoLink.trim() })
+        if (checkLink) {
+            return res.status(400).send({ status: false, msg: `college ${logoLink} is already present` })
         }
 
         const result = await collegeModel.create(data)
-        return res.status(201)
+        return res.status(201) //created successfully
             .send({ status: true, data: { name: result.name, fullName: result.fullName, logoLink: result.logoLink, isDeleted: result.isDeleted } })
- }  catch (error) {
+    } catch (error) {
         return res.status(500).send({ status: false, message: error.message });
     }
 };
