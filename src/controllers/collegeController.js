@@ -32,19 +32,11 @@ const createCollege = async (req, res) => {
         if (!validator.isValidName(fullName)) {
             return res.status(400).send({ status: false, message: "please Enter a valid fullname" })
         }
-        const checkFullname = await collegeModel.findOne({ fullName: fullName.trim() })
-        if (checkFullname) {
-            return res.status(400).send({ status: false, msg: `college ${fullName} is already present` })
-        }
         if (!logoLink) {
             return res.status(400).send({ status: false, message: "LogoLink must contain" })
         }
         if (!validator.isValidUrl(logoLink)) {
             return res.status(400).send({ status: false, message: "please Enter a valid logolink." })
-        }
-        const checkLink = await collegeModel.findOne({ logoLink: logoLink.trim() })
-        if (checkLink) {
-            return res.status(400).send({ status: false, msg: `college ${logoLink} is already present` })
         }
         const result = await collegeModel.create(data)
         return res.status(201).send({ status: true, data: { name: result.name, fullName: result.fullName, logoLink: result.logoLink, isDeleted: result.isDeleted } })
