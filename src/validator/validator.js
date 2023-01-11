@@ -35,9 +35,9 @@ const isValid = function (value) {
     return result
   }
   
-  module.exports.isValid = isValid
-  module.exports.isValidUrl = isValidUrl
-  module.exports.isValidcollegeName = isValidcollegeName
-  module.exports.isValidName = isValidName
-  module.exports.isValidNumber = isValidNumber
-  module.exports.isValidEmail = isValidEmail
+  module.exports.isValid = isValid;
+  module.exports.isValidUrl = isValidUrl;
+  module.exports.isValidcollegeName = isValidcollegeName;
+  module.exports.isValidName = isValidName;
+  module.exports.isValidNumber = isValidNumber;
+  module.exports.isValidEmail = isValidEmail;

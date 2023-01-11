@@ -1,11 +1,9 @@
 const express = require('express');
-// const bodyParser = require('body-parser');
 const route = require('./routes/route.js');
-const { default: mongoose } = require('mongoose');
+const mongoose = require('mongoose');
 const app = express();
 
 app.use(express.json());
-// app.use(bodyParser.urlencoded({ extended: true }));
 
 mongoose.set('strictQuery', true)
 mongoose.connect("mongodb+srv://divyamala_:Dt25042000knp@divyamala.0cofsch.mongodb.net/groupXDatabase", {
@@ -14,12 +12,12 @@ mongoose.connect("mongodb+srv://divyamala_:Dt25042000knp@divyamala.0cofsch.mongo
     .then(() => console.log("MongoDb is connected"))
     .catch(err => console.log(err))
 
-// app.use(
-//     function (req, res, next) {
-//         console.log("inside GLOBAL MW");
-//         next();
-//     }
-// );
+app.use(
+    function (req, res, next) {
+        console.log("inside GLOBAL MW");
+        next();
+    }
+);
 
 app.use('/', route);
 
